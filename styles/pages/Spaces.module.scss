@@ -1,0 +1,55 @@
+@import "../components/Buttons.module.scss";
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+@import "../base/typography";
+
+
+.place{
+    display: flex;
+    flex-direction: column;
+
+    .right{
+        width: 100%;
+        background-color: red;
+        margin-top: 40px;
+    }
+
+    .left{
+        width: 100%;
+
+        &__tickets{
+            width: 100%;
+            margin-top: 20px;
+            
+            .zona{
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 15px;
+
+                &__title{
+                }
+
+                &__counter{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .button{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 100%;
+                        border: 1px solid black;
+                    }
+
+                    .number{
+                        margin:0px 10px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -2,4 +2,4 @@ export * from './footer'
 export * from './navbar'
 export * from './modal'
 
-export * from './layouts/Layout'
+export * from './Layouts/layout'

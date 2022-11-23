@@ -1,14 +1,12 @@
 import Head from 'next/head'
 import { FC } from 'react'
+import { NavBar, Footer, Modal } from "../index"
 
 interface Props {
     children?: any;
 }
 
-
 export const Layout: FC<Props> = ({ children }) => {
-
-
 
     return (
         <>
@@ -18,8 +16,9 @@ export const Layout: FC<Props> = ({ children }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             
-            <p>This is the Layout</p>
+            <NavBar />
             { children }
+
         </>
     )
 

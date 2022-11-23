@@ -1,0 +1,36 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+.modal{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    
+    display: flex;
+    justify-content: center;
+
+    //display: none; //DELETE
+
+    &__background{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        background-color: hsla(0, 0%, 0%, 0.3);
+    }
+
+    &__container{
+        width: 100%;
+        height: 100%;
+        background-color: $white;
+        z-index: 99;
+        color: $black;
+        padding: 30px 40px;
+
+        .top{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
