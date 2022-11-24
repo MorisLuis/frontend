@@ -1,7 +1,14 @@
-import { Children } from 'react'
+import { CSSProperties, useEffect } from 'react'
 import styles from '../styles/components/Modal.module.scss'
 
-export const Modal = ({children, setPage} : any ) => {
+interface Props {
+    visible: boolean,
+    setPage: any,
+    children: JSX.Element,
+    bodyStyle?: CSSProperties,
+}
+
+export const Modal = ({children, setPage, visible} : Props ) => {
 
     const nextPage = () => {
         setPage((currPage : any) => currPage + 1 )
@@ -11,8 +18,15 @@ export const Modal = ({children, setPage} : any ) => {
         setPage((currPage : any) => currPage - 1 )
     }
 
-    return(
-        <>
+    useEffect(() => {
+        if (visible) {
+            document.body.style.position = 'fixed'
+        } else {
+            document.body.style.position = ''
+        }
+    }, [visible])
+
+    return visible ?
             <div className={styles.modal}>
                 <div className={styles.modal__background}>
                 </div>
@@ -28,15 +42,7 @@ export const Modal = ({children, setPage} : any ) => {
                         </div>
                     </div>
                     {children}
-
-                    <div className={styles.buttons}>
-                        <button onClick={backPage}>Atras</button>
-                        <button onClick={nextPage}>Siguiente</button>
-                    </div>
                 </div>
-
-
             </div>
-        </>
-    )
+    : null
 }

@@ -1,6 +1,6 @@
-import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { Layout, Modal } from '../components'
+import { Event, Layout, Modal } from '../components'
 import { Payment } from '../components/selectTicket/payment'
 import { Date } from '../components/selectTicket/selectDate'
 import { Place } from '../components/selectTicket/selectPlace'
@@ -38,35 +38,29 @@ export default function Home() {
     }
   }
 
+  const router = useRouter()
+
   return (
     <>
       <Layout>
         <div className={styles.event}>
-
           <div className={styles.event__top}>
               <p className={styles.heading_primary}>Eventos</p>
           </div>
           {
             event.map( (event) => (
-              <div className={styles.event__item}>
-                <div className={styles.image}>
-                  <Image alt="Forum" src={event.image} className={styles.picture} width={300} height={200} />
-                </div>
-
-                <div className={styles.title}>
-                  <p className={styles.title__text}>{event.title}</p>
-                  <p className={styles.title__icon}>x</p>
-                </div>
-              </div>
+              <>
+                <Event image={event.image} title={event.title}></Event>
+              </>
             ))
           }
-
         </div>
+        <Modal
+        visible={!!router.query.eventId}
+        >
+          {pageDisplay()}
+        </Modal>
       </Layout>
-
-      <Modal setPage={setPage}>
-        {pageDisplay()}
-      </Modal>
     </>
   )
 }
