@@ -14,6 +14,8 @@ interface Props {
 
 const Home: FC<Props> = ({ events }) => {
 
+  console.log({events});
+
   const [page, setPage] = useState(0)
 
   const pageDisplay = () => {
@@ -39,7 +41,7 @@ const Home: FC<Props> = ({ events }) => {
           </div>
           {
             events.map((event) => (
-              <div key={event.id} className={styles.event__item}>
+              <div key={event._id} className={styles.event__item}>
                 <div className={styles.image}>
                   <Image alt="Forum" src={event.image} className={styles.picture} width={300} height={200} />
                 </div>

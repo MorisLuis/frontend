@@ -9,7 +9,7 @@ export interface EventsData {
 export interface Event {
 
   //Id de evento
-  id: string
+  _id: string
 
   //Nombre del evento
   name: string,
