@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
 import { Layout, Modal } from '../components'
 import { Payment } from '../components/selectTicket/payment'
@@ -31,16 +32,17 @@ const Home: FC<Props> = ({ events }) => {
     }
   }
 
+  const router = useRouter()
+
   return (
     <>
       <Layout title='Cartelera'>
         <div className={styles.event}>
-
           <div className={styles.event__top}>
             <p className={styles.heading_primary}>Eventos</p>
           </div>
           {
-            events.map((event) => (
+            events.map( (event) => (
               <div key={event._id} className={styles.event__item}>
                 <div className={styles.image}>
                   <Image alt="Forum" src={event.image} className={styles.picture} width={300} height={200} />
@@ -53,12 +55,13 @@ const Home: FC<Props> = ({ events }) => {
               </div>
             ))
           }
-
         </div>
+        <Modal
+        visible={!!router.query.eventId}
+        >
+          {pageDisplay()}
+        </Modal>
       </Layout>
-      {/*  <Modal setPage={setPage}>
-        {pageDisplay()}
-      </Modal> */}
     </>
   )
 }
