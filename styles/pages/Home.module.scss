@@ -3,9 +3,8 @@
 @import "../abstracts/mixins";
 @import "../base/typography";
 
-.event{
-
-    &__top{
+.event {
+    &__top {
         height: 80px;
         width: 100%;
         background-color: $color-primary-light;
@@ -15,31 +14,29 @@
         margin-bottom: 50px;
     }
 
-    &__item{
+    &__item {
         padding: 0px 30px;
         margin-bottom: 50px;
-        
-        .image{
-            background-color: yellow;
-            height: 400px;
+
+        .image {
             margin-bottom: 20px;
-            
-            .picture{
+
+            .picture {
                 border-radius: 5px;
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+                object-fit: contain;
             }
         }
 
-        .title{
+        .title {
             display: flex;
             justify-content: space-between;
-            
-            &__text{
+
+            &__text {
                 width: 70%;
             }
         }
     }
-
 }
