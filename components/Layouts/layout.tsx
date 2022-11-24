@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
-import { NavBar, Footer, Modal } from "../index"
+import { NavBar } from "../index"
 
 interface Props {
     title: string,

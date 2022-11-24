@@ -2,16 +2,20 @@ import styles from '../styles/pages/Home.module.scss'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Link from 'next/link'
+import { FC } from 'react'
+import { Event as IEvent } from '../interfaces/Event'
 
-export const Event = ({title, image} : any) => {
+export const Event: FC<IEvent> = ({ name, image, slug }) => {
 
     const { pathname, query } = useRouter()
 
     return (
         <>
             <Link
-            href={{ pathname, query: { ...query, eventId: `/?eventId=event-1` } }}
-            as={`/event-1`}
+                scroll={false}
+                shallow
+                href={{ pathname, query: { ...query, slug: `/events?slug=${slug}` } }}
+                as={`/events/${slug}`}
             >
                 <div className={styles.event__item}>
                     <div className={styles.image}>
@@ -19,7 +23,7 @@ export const Event = ({title, image} : any) => {
                     </div>
 
                     <div className={styles.title}>
-                        <p className={styles.title__text}>{title}</p>
+                        <p className={styles.title__text}>{name}</p>
                         <p className={styles.title__icon}>x</p>
                     </div>
                 </div>

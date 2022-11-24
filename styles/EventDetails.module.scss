@@ -1,36 +1,34 @@
-@import "../components/Buttons.module.scss";
-@import "../abstracts/variables";
-@import "../abstracts/mixins";
-@import "../base/typography";
+@import "./components/Buttons.module.scss";
+@import "./abstracts/variables";
+@import "./abstracts/mixins";
+@import "./base/typography";
 
-
-
-.date{
+.date {
     display: flex;
     flex-direction: column;
+    padding: 35px;
 
-    .right{
+    .right {
         width: 100%;
         margin-top: 40px;
         margin-bottom: 40px;
 
-        &__title{
+        &__title {
             display: flex;
             margin-bottom: 15px;
-            
-            &.icon{
+
+            &.icon {
                 margin-right: 10px;
                 background-color: red;
             }
         }
 
-        &__subtitle{
+        &__subtitle {
             margin-bottom: 15px;
         }
 
-        &__ticket{
-
-            .item{
+        &__ticket {
+            .item {
                 border: 1px solid $black;
                 width: 100%;
                 padding: 15px 20px;
@@ -43,43 +41,41 @@
         }
     }
 
-    .left{
+    .left {
         width: 100%;
 
-        &__title{
-            margin-bottom: 15px;;
+        &__title {
+            margin-bottom: 15px;
         }
 
-        &__front{
-
-            .picture{
+        &__front {
+            .picture {
                 width: 100%;
                 object-fit: cover;
             }
         }
 
-        .about{
-            &__title{
+        .about {
+            &__title {
                 margin-bottom: 15px;
             }
-            &__paragraph{
+            &__paragraph {
                 margin-bottom: 15px;
             }
         }
 
-        .slider{
-            .picture{
+        .slider {
+            .picture {
                 width: 100%;
                 object-fit: cover;
             }
         }
 
-        .video{
-            .picture{
+        .video {
+            .picture {
                 width: 100%;
                 object-fit: cover;
             }
         }
-
     }
 }

@@ -2,37 +2,40 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
 import { Layout, Modal } from '../components'
+import { Event } from '../components/Event'
+import { EventDetails } from '../components/EventDetails'
 import { Payment } from '../components/selectTicket/payment'
-import { Date } from '../components/selectTicket/selectDate'
 import { Place } from '../components/selectTicket/selectPlace'
-import { Event } from '../interfaces/Event'
+import { Event as IEvent } from '../interfaces/Event'
 import { getEvents } from '../services/events'
 import styles from '../styles/pages/Home.module.scss'
 
 interface Props {
-  events: Event[]
+  events: IEvent[]
 }
 
 const Home: FC<Props> = ({ events }) => {
 
-  console.log({events});
-
+  console.log({ events });
   const [page, setPage] = useState(0)
+
+  const router = useRouter()
+  console.log(router.query)
 
   const pageDisplay = () => {
     switch (page) {
       case 0:
-        return <Date />
+        return <EventDetails />
       case 1:
         return <Place />
       case 2:
         return <Payment />
       default:
-        <></>
+        return <></>
     }
   }
 
-  const router = useRouter()
+
 
   return (
     <>
@@ -42,22 +45,15 @@ const Home: FC<Props> = ({ events }) => {
             <p className={styles.heading_primary}>Eventos</p>
           </div>
           {
-            events.map( (event) => (
-              <div key={event._id} className={styles.event__item}>
-                <div className={styles.image}>
-                  <Image alt="Forum" src={event.image} className={styles.picture} width={300} height={200} />
-                </div>
-
-                <div className={styles.title}>
-                  <p className={styles.title__text}>{event.name}</p>
-                  <p className={styles.title__icon}>x</p>
-                </div>
-              </div>
+            events.map((event) => (
+              <Event key={event._id} {...event} />
             ))
           }
         </div>
         <Modal
-        visible={!!router.query.eventId}
+          visible={!!router.query.slug}
+          onClose={() => router.push('/', undefined, { scroll: false })}
+          onCancel={() => router.push('/', undefined, { scroll: false })}
         >
           {pageDisplay()}
         </Modal>

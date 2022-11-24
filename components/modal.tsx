@@ -1,48 +1,52 @@
-import { CSSProperties, useEffect } from 'react'
-import styles from '../styles/components/Modal.module.scss'
+import React, { CSSProperties, useEffect } from 'react'
+import styles from '../styles/Modal.module.scss'
 
 interface Props {
     visible: boolean,
-    setPage: any,
+    title?: string,
+    onClose?: () => void,
+    onOk?: () => void,
+    onCancel?: () => void,
     children: JSX.Element,
+    header?: JSX.Element,
     bodyStyle?: CSSProperties,
+    loadingState?: boolean
 }
 
-export const Modal = ({children, setPage, visible} : Props ) => {
-
-    const nextPage = () => {
-        setPage((currPage : any) => currPage + 1 )
-    }
-
-    const backPage = () => {
-        setPage((currPage : any) => currPage - 1 )
-    }
+export const Modal = ({ onClose, visible, children, bodyStyle, loadingState }: Props) => {
 
     useEffect(() => {
         if (visible) {
-            document.body.style.position = 'fixed'
+            document.body.style.overflow = 'hidden'
         } else {
-            document.body.style.position = ''
+            document.body.style.overflow = ''
         }
     }, [visible])
 
+
     return visible ?
+        <div className="modal-root">
+            <div onClick={() => {
+                onClose && onClose()
+            }} className={styles.modalBackdrop} />
             <div className={styles.modal}>
-                <div className={styles.modal__background}>
+                <div onClick={() => {
+                    if (loadingState) {
+                        return
+                    }
+                    if (onClose) {
+                        onClose()
+                    }
+                }} className={styles.modalClose}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                 </div>
 
-                <div className={styles.modal__container}>
-                    <div className={styles.top}>
-                        <div className={styles.top__secured}>
-                            Seguro
-                        </div>
-
-                        <div className={styles.top__close}>
-                            X
-                        </div>
-                    </div>
+                <div style={{ ...bodyStyle }} className={styles.modalBody}>
                     {children}
                 </div>
             </div>
-    : null
+        </div> :
+        null
 }
