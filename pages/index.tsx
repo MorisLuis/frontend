@@ -1,27 +1,18 @@
 import Image from 'next/image'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { Layout, Modal } from '../components'
 import { Payment } from '../components/selectTicket/payment'
 import { Date } from '../components/selectTicket/selectDate'
 import { Place } from '../components/selectTicket/selectPlace'
+import { Event } from '../interfaces/Event'
+import { getEvents } from '../services/events'
 import styles from '../styles/pages/Home.module.scss'
 
-export default function Home() {
+interface Props {
+  events: Event[]
+}
 
-  const event = [
-    {
-      title: "Cuentos que no son cuentos",
-      image: "/event1.jpg"
-    },
-    {
-      title: "Cuentos de navidad",
-      image: "/event2.jpg"
-    },
-    {
-      title: "Batman y robin",
-      image: "/event1.jpg"
-    }
-  ]
+const Home: FC<Props> = ({ events }) => {
 
   const [page, setPage] = useState(0)
 
@@ -40,21 +31,21 @@ export default function Home() {
 
   return (
     <>
-      <Layout>
+      <Layout title='Cartelera'>
         <div className={styles.event}>
 
           <div className={styles.event__top}>
-              <p className={styles.heading_primary}>Eventos</p>
+            <p className={styles.heading_primary}>Eventos</p>
           </div>
           {
-            event.map( (event) => (
-              <div className={styles.event__item}>
+            events.map((event) => (
+              <div key={event.id} className={styles.event__item}>
                 <div className={styles.image}>
                   <Image alt="Forum" src={event.image} className={styles.picture} width={300} height={200} />
                 </div>
 
                 <div className={styles.title}>
-                  <p className={styles.title__text}>{event.title}</p>
+                  <p className={styles.title__text}>{event.name}</p>
                   <p className={styles.title__icon}>x</p>
                 </div>
               </div>
@@ -63,10 +54,30 @@ export default function Home() {
 
         </div>
       </Layout>
-
-      <Modal setPage={setPage}>
+      {/*  <Modal setPage={setPage}>
         {pageDisplay()}
-      </Modal>
+      </Modal> */}
     </>
   )
+}
+
+export default Home
+
+
+export const getServerSideProps = async () => {
+
+  let data
+
+  try {
+    data = await getEvents()
+  } catch (error) {
+    console.log(error);
+  }
+
+
+  return {
+    props: {
+      events: data.events
+    }
+  }
 }
