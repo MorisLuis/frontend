@@ -2,6 +2,8 @@ import { Event } from "./Event";
 
 export interface FunctionInterface {
 
+  _id:string
+
   //Dia de la funcion
   day: string,
 

@@ -4,20 +4,20 @@ import React, { FC } from 'react'
 import { Layout } from '../../components'
 import { EventDetails } from '../../components/EventDetails'
 import { Event } from '../../interfaces/Event'
+import { FunctionInterface } from '../../interfaces/Function'
 import { getEvent } from '../../services/events'
 
 interface Props {
 
     event: Event
+    functions: FunctionInterface[]
 }
 
-const EventDetailsPage: FC<Props> = ({ event }) => {
-
-    console.log({ event });
+const EventDetailsPage: FC<Props> = ({ event, functions }) => {
 
     return (
-        <Layout>
-            <EventDetails serverEvent={event} />
+        <Layout title={event.name}>
+            <EventDetails serverFunctions={functions} serverEvent={event} />
         </Layout>
     )
 }
@@ -37,7 +37,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
     return {
         props: {
-            event: data.event
+            event: data.event,
+            functions: data.functions
         }
     }
 
