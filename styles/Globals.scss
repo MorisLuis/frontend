@@ -1,3 +1,5 @@
+@import "./Buttons.scss";
+
 html,
 body {
   padding: 0;
@@ -48,9 +50,61 @@ a {
 }
 
 .space {
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
-  background-color: red;
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  background-color: #e23542;
   flex-shrink: 0;
+  margin-right: 5px;
+}
+
+.sectionPrice {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.circle {
+  width: 15px;
+  height: 15px;
+
+  border-radius: 15px;
+  margin-right: 10px;
+}
+
+.sectionA {
+  background-color: #e23542;
+}
+
+.sectionB {
+  background-color: black;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.error {
+  display: block;
+  color: #e23542;
+  margin-top: 5px;
+}
+
+.input {
+  height: 42px;
+  font-size: 16px;
+  padding: 10px;
+  border: 0;
+  outline: 0;
+  width: 100%;
+  border-radius: 5px;
+  border: 2px solid #d9d9d9;
+  outline: none;
+  padding: 10px;
+  transition: all 0.3s;
+  &:focus {
+    border: 2px solid black;
+  }
 }
