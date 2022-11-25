@@ -12,6 +12,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { api } from '../api/api'
 import toast from 'react-hot-toast'
 import { SpaceInterface } from '../interfaces/Space'
+import { OrderConfirmationModal } from './OrderConfirmationModal'
 
 interface Props {
 	serverEvent?: Event,
@@ -27,6 +28,8 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 	const [loading, setLoading] = useState(true)
 
 	const [functions, setFunctions] = useState(serverFunctions)
+
+	const [confirmation, setConfirmation] = useState(false)
 
 	const [event, setEvent] = useState(serverEvent)
 
@@ -336,6 +339,7 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 						numberedSpaces={[]}
 						setCurrentPage={setCurrentPage}
 						functionId={currentFunction._id}
+						setConfirmation={setConfirmation}
 					/>
 				</Elements>
 			)
@@ -352,18 +356,23 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 					renderPage()
 				}
 			</div>
+			{
+				confirmation &&
+				<OrderConfirmationModal />
+			}
 		</>
 	)
 }
 
 const Checkout = ({ setCurrentPage, functionId, numberedSpaces,
-	unnumberedSpaces }:
+	unnumberedSpaces, setConfirmation }:
 
 	{
 		setCurrentPage: (page: number) => void,
 		functionId: string,
 		numberedSpaces: any[]
-		unnumberedSpaces: any[]
+		unnumberedSpaces: any[],
+		setConfirmation: any
 	}
 
 ) => {
@@ -405,7 +414,7 @@ const Checkout = ({ setCurrentPage, functionId, numberedSpaces,
 				}
 				if (confirmPayment?.paymentIntent?.status === 'succeeded') {
 					await api.post(`/api/orders/createOrder`, order)
-					//setConfirmation(true)
+					setConfirmation(true)
 					setWaiting(false)
 				}
 			} catch (error: any) {
