@@ -16,11 +16,9 @@ interface Props {
 
 const Home: FC<Props> = ({ events }) => {
 
-  console.log({ events });
   const [page, setPage] = useState(0)
 
   const router = useRouter()
-  console.log(router.query)
 
   const pageDisplay = () => {
     switch (page) {
@@ -35,8 +33,6 @@ const Home: FC<Props> = ({ events }) => {
     }
   }
 
-
-
   return (
     <>
       <Layout title='Cartelera'>
@@ -44,11 +40,13 @@ const Home: FC<Props> = ({ events }) => {
           <div className={styles.event__top}>
             <p className={styles.heading_primary}>Eventos</p>
           </div>
-          {
-            events.map((event) => (
-              <Event key={event._id} {...event} />
-            ))
-          }
+          <div className={styles.eventsGrid}>
+            {
+              events.map((event) => (
+                <Event key={event._id} {...event} />
+              ))
+            }
+          </div>
         </div>
         <Modal
           visible={!!router.query.slug}

@@ -24,7 +24,6 @@ export const Event: FC<IEvent> = ({ name, image, slug }) => {
 
                     <div className={styles.title}>
                         <p className={styles.title__text}>{name}</p>
-                        <p className={styles.title__icon}>x</p>
                     </div>
                 </div>
             </Link>

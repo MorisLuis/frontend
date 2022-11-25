@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 import styles from "../styles/components/NavBar.module.scss"
@@ -12,21 +13,27 @@ export const NavBar = () => {
         <>
             <div className={styles.navbar}>
                 <div className={styles.navbar__logo}>
-                    FORUM
+                    <Image
+                        style={{
+                            objectFit: 'contain'
+                        }}
+                        src='/4orium-logo.png' width={100} height={100}
+                        alt='4orium logo'
+                    />
                 </div>
 
-                <div 
-                className={styles.navbar__menu}
-                onClick={openMenu}
+                <div
+                    className={styles.navbar__menu}
+                    onClick={openMenu}
                 >
                     Menu
                 </div>
             </div>
 
             <div className={!isOpen ? styles.menu + ' ' + styles.close : styles.menu}>
-                <div 
-                className={styles.menu__close}
-                onClick={openMenu}
+                <div
+                    className={styles.menu__close}
+                    onClick={openMenu}
                 >
                     <p>X</p>
                 </div>
@@ -54,9 +61,17 @@ export const NavBar = () => {
                         </Link>
                     </div>
                 </div>
+
+                <div className={styles.banner}>
+                    <Image
+                        alt="" width={100} height={100} src='/grid.png' style={{
+                            objectFit: 'cover',
+                            display: 'block'
+                        }} />
+                </div>
             </div>
         </>
-    
+
     )
 
 }
