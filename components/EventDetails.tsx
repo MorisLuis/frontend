@@ -110,21 +110,19 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 		let backgroundColor = '#e23542'
 
 		if (space.number === 'A-1') {
-			backgroundColor = 'yellow'
+			return backgroundColor = 'yellow'
 		}
 		if (!space.isAvailable) {
-			backgroundColor = 'gray'
+			return backgroundColor = 'gray'
 		}
 
 		if (index === 6 || index === 7) {
-			backgroundColor = '#a8e0e6'
+			return backgroundColor = '#a8e0e6'
 		}
 
 		if (selected.map(item => item._id).includes(space._id)) {
-			backgroundColor = 'black'
+			return backgroundColor = 'black'
 		}
-
-		return backgroundColor
 
 	}
 
@@ -209,9 +207,6 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 				return (
 					<div className={styles.functionDetails}>
 						<div className={styles.functionLeft}>
-							{/* {
-								event?.type === 'No Numerado' ? <h3>Selecciona la zona</h3> : <h3>Elige tus espacios</h3>
-							} */}
 							<div className="section">
 								<h3>{event?.name}</h3>
 								<div className={styles.schedule}>
@@ -312,50 +307,6 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 						</div>
 
 						<div className={styles.functionRight}>
-							{/* {
-								event?.type === 'No Numerado' &&
-								<div className={styles.buttons}>
-									<div className={styles.sectionAButtons}>
-										<div className={styles.details}>
-											<span>Boletos Zona A</span>
-										</div>
-										<div className={styles.input}>
-											<button
-												onClick={() => {
-													if (sectionATicketCount <= 0) return
-													setSectionATicketCount(sectionATicketCount - 1)
-												}}
-											>-</button>
-											<span>{sectionATicketCount}</span>
-											<button
-												onClick={() => {
-													setSectionATicketCount(sectionATicketCount + 1)
-												}}
-											>+</button>
-										</div>
-									</div>
-									<div className={styles.sectionBButtons}>
-										<div className={styles.details}>
-											<span>Boletos Zona B</span>
-										</div>
-										<div className={styles.input}>
-											<button
-												onClick={() => {
-													if (sectionBTicketCount <= 0) return
-													setSectionBTicketCount(sectionBTicketCount - 1)
-												}}
-											>-</button>
-											<span>{sectionBTicketCount}</span>
-											<button
-												onClick={() => {
-													setSectionBTicketCount(sectionBTicketCount + 1)
-												}}
-											>+</button>
-										</div>
-									</div>
-								</div>
-							} */}
-
 							<div className={styles.subTotal}>
 								<span>Asientos: {
 									selected.map((space, index) => {
