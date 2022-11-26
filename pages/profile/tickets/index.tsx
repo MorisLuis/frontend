@@ -6,7 +6,7 @@ import styles from '../../../styles/pages/Home.module.scss'
 export default function Profile() {
     return (
         <>
-            <Layout>
+            <Layout title=''>
                 <p className={styles.title}>Tickets!</p>
             </Layout>
         </>
