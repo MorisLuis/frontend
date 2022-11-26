@@ -34,47 +34,11 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 
 	const [event, setEvent] = useState(serverEvent)
 
-	const [sectionATicketCount, setSectionATicketCount] = useState(0)
-
-	const [sectionBTicketCount, setSectionBTicketCount] = useState(0)
-
 	const [currentFunction, setCurrentFunction] = useState({} as FunctionInterface)
 
 	const [currentPage, setCurrentPage] = useState(1)
 
 	const [functionSpaces, setFunctionSpaces] = useState<SpaceInterface[]>([])
-
-	const getSpaces = () => {
-
-		let sectionASpaces: SpaceInterface[] = []
-
-		sectionASpaces.length = sectionATicketCount
-
-		sectionASpaces.fill({
-			price: event?.sectionAPrice || 0,
-			function: currentFunction,
-			isAvailable: true,
-			number: 'avc',
-			section: 'A'
-		}
-		);
-
-		let sectionBSpaces: SpaceInterface[] = []
-
-		sectionBSpaces.length = sectionBTicketCount
-
-		sectionBSpaces.fill(
-			{
-				price: event?.sectionBPrice || 0,
-				function: currentFunction,
-				isAvailable: true,
-				number: 'avc',
-				section: 'B'
-			}
-		);
-
-		return [...sectionASpaces, ...sectionBSpaces]
-	}
 
 	const rows = {
 		'A': [
@@ -110,6 +74,8 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 		],
 	}
 
+	const [selected, setSelected] = useState<SpaceInterface[]>([])
+
 	useEffect(() => {
 
 		if (serverEvent && serverFunctions) return setLoading(false)
@@ -137,6 +103,40 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 		} catch (error) {
 
 		}
+	}
+
+	const renderColor = (space: SpaceInterface, index: number) => {
+
+		let backgroundColor = '#e23542'
+
+		if (space.number === 'A-1') {
+			backgroundColor = 'yellow'
+		}
+		if (!space.isAvailable) {
+			backgroundColor = 'gray'
+		}
+
+		if (index === 6 || index === 7) {
+			backgroundColor = '#a8e0e6'
+		}
+
+		if (selected.map(item => item._id).includes(space._id)) {
+			backgroundColor = 'black'
+		}
+
+		return backgroundColor
+
+	}
+
+	const renderTotal = () => {
+
+		//@ts-ignore
+
+		let sumA = selected.filter(space => space.section === 'A').length * event?.sectionAPrice
+		//@ts-ignore
+		let sumB = selected.filter(space => space.section === 'B').length * event?.sectionBPrice
+
+		return sumA + sumB
 	}
 
 	const renderPage = () => {
@@ -195,12 +195,12 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 								<h2>Acerca del evento</h2>
 								<span>{event?.description}</span>
 							</div>
-							<div className={styles.slider}>
+							{/* <div className={styles.slider}>
 								<Image alt="Forum" src={"/event1.jpg"} className={styles.picture} width={300} height={200} />
 							</div>
 							<div className={styles.video}>
 								<Image alt="Forum" src={"/event2.jpg"} className={styles.picture} width={300} height={200} />
-							</div>
+							</div> */}
 						</div>
 					</div>
 				)
@@ -209,9 +209,9 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 				return (
 					<div className={styles.functionDetails}>
 						<div className={styles.functionLeft}>
-							{
+							{/* {
 								event?.type === 'No Numerado' ? <h3>Selecciona la zona</h3> : <h3>Elige tus espacios</h3>
-							}
+							} */}
 							<div className="section">
 								<h3>{event?.name}</h3>
 								<div className={styles.schedule}>
@@ -226,70 +226,93 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 									<div className="circle sectionB"></div>
 									Precio Zona B: ${event?.sectionBPrice} MXN
 								</div>
-
+								<div className='sectionPrice'>
+									<div className="circle wheelchair"></div>
+									Silla de ruedas
+								</div>
+								<div className='sectionPrice'>
+									<div className="circle notAvailable"></div>
+									No disponible
+								</div>
+								<div className='sectionPrice'>
+									<div className="circle selected"></div>
+									Selección
+								</div>
+								<h4>Elige tus espacios</h4>
 							</div>
-							{
-								event?.type === 'No Numerado' ?
-									<div className={styles.spaces}>
-										<div className={styles.stage}>
-											<span>Escenario</span>
-										</div>
-										<div className={styles.rowsWrapper}>
-											<div className={styles.rows}>
-												{
-													Object.entries(rows).map((row, index) => (
-														<div
-															key={row[0]}
-															className={styles.row}
-														>
-															<div className={styles.cols}>
-																<div className='leftSpaces'>
-																	{
-																		row[1][0].map(col =>
-																			<div
-																				style={{
-																					backgroundColor: index === 6 || index === 7 ? 'black' : '#e23542'
-																				}}
-																				className='space' key={col}></div>
-																		)
-																	}
-																</div>
-																<div
-
-
-																	className='rightSpaces'>
-																	{
-																		row[1][1]?.map(col =>
-																			<div
-																				style={{
-																					backgroundColor: index === 6 || index === 7 ? 'black' : '#e23542'
-																				}}
-																				className='space' key={col}></div>
-																		)
-
-																	}
-																</div>
-															</div>
-
-														</div>
-													))
-												}
-											</div>
-										</div>
-									</div> :
-
-									<div>Espacios disponibles {currentFunction.availableSpaces}
-
+							<div className={styles.spaces}>
+								<div className={styles.stage}>
+									<span>Escenario</span>
+								</div>
+								<div className={styles.rowsWrapper}>
+									<div className={styles.rows}>
 										{
-											renderSpaces()
-										}
+											Object.entries(renderSpaces()).map((row, index) => (
+												<div
+													key={row[0]}
+													className={styles.row}
+												>
 
+													<div className={styles.cols}>
+														<div className='leftSpaces'>
+															<div style={{
+																marginRight: 10
+															}}>
+																{row[0]}
+															</div>
+															{
+																row[1][0].map(space =>
+																	<div
+																		onClick={() => {
+																			if (!space.isAvailable) return
+																			if (selected.map(item => item._id).includes(space._id)) {
+																				setSelected(selected.filter(item => item._id !== space._id))
+																			} else {
+																				setSelected([...selected, space])
+																			}
+																		}}
+																		style={{
+																			backgroundColor: renderColor(space, index),
+																			cursor: !space.isAvailable ? 'not-allowed' : 'pointer'
+																		}}
+																		className='space' key={space.number}></div>
+																)
+															}
+														</div>
+														<div
+															className='rightSpaces'>
+															{
+																row[1][1]?.map(space =>
+																	<div
+																		onClick={() => {
+																			if (!space.isAvailable) return
+																			if (selected.map(item => item._id).includes(space._id)) {
+																				setSelected(selected.filter(item => item._id !== space._id))
+																			} else {
+																				setSelected([...selected, space])
+																			}
+																		}}
+																		style={{
+																			backgroundColor: renderColor(space, index),
+																			cursor: !space.isAvailable ? 'not-allowed' : 'pointer'
+																		}}
+																		className='space' key={space.number}></div>
+																)
+
+															}
+														</div>
+													</div>
+
+												</div>
+											))
+										}
 									</div>
-							}
+								</div>
+							</div>
 						</div>
 
 						<div className={styles.functionRight}>
-							{
+							{/* {
 								event?.type === 'No Numerado' &&
 								<div className={styles.buttons}>
 									<div className={styles.sectionAButtons}>
@@ -331,30 +354,34 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 										</div>
 									</div>
 								</div>
-							}
+							} */}
 
 							<div className={styles.subTotal}>
+								<span>Asientos: {
+									selected.map((space, index) => {
+										return `${space.number}, `
+									})
+								}</span>
+								<br />
 								<span>Subtotal</span>
-								<h3>${
-									/* @ts-ignore */
-									(event?.sectionAPrice * sectionATicketCount) + (event?.sectionBPrice * sectionBTicketCount)
-								} MXN</h3>
+								<h3>${renderTotal()} MXN</h3>
+
 							</div>
 
 							<div className={styles.footer}>
 								<button
 									disabled={
-										sectionATicketCount === 0 &&
-										sectionBTicketCount === 0
+										selected.length === 0
 									}
 									onClick={() => {
 										setCurrentPage(3)
 									}}
-									className='btn btn-red btn-block'>Continuar</button>
+									className='btn btn-red btn-block mb-20'>Continuar</button>
 								<button
 									onClick={() => {
 										setCurrentFunction({} as FunctionInterface)
 										setCurrentPage(1)
+										setSelected([])
 									}}
 									className='btn btn-link btn-block'>Regresar</button>
 							</div>
@@ -365,23 +392,18 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 			case 3: return (
 				<Elements stripe={stripePromise}>
 					<Checkout
-						unnumberedSpaces={getSpaces()}
-						numberedSpaces={[]}
 						setCurrentPage={setCurrentPage}
 						functionId={currentFunction._id}
 						setConfirmation={setConfirmation}
 						event={event || {} as Event}
 						currentFunction={currentFunction}
-						ticketCount={{
-							sectionATicketCount,
-							sectionBTicketCount,
-						}}
+						selected={selected}
+						renderTotal={renderTotal}
 					/>
 				</Elements>
 			)
 		}
 	}
-
 
 	const renderSpaces = () => {
 		const filaA = functionSpaces.filter(space => space.number.includes('A'))
@@ -399,52 +421,37 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 				filaA.slice(6, 13)
 			],
 			'B': [
-				[1, 2, 3, 4, 5, 6],
-				[7, 8, 9, 10, 11, 12, 13, 14, 15]
+				filaB.slice(0, 6),
+				filaB.slice(6, 13)
 			],
 			'C': [
-				[1, 2, 3, 4, 5, 6],
-				[7, 8, 9, 10, 11, 12, 13, 14, 15]
+				filaC.slice(0, 6),
+				filaC.slice(6, 13)
 			],
 			'D': [
-				[1, 2, 3, 4, 5, 6],
-				[7, 8, 9, 10, 11, 12, 13, 14, 15]
+				filaD.slice(0, 6),
+				filaD.slice(6, 13)
 			],
 			'E': [
-				[1, 2, 3, 4, 5, 6],
-				[7, 8, 9, 10, 11, 12, 13, 14, 15]
+				filaE.slice(0, 6),
+				filaE.slice(6, 13)
 			],
 			'F': [
-				[1, 2, 3, 4, 5, 6],
-				[7, 8, 9, 10, 11, 12, 13, 14, 15]
+				filaF.slice(0, 6),
+				filaF.slice(6, 13)
 			],
 			'G': [
-				[1, 2, 3, 4, 5, 6],
-				[7, 8, 9, 10, 11, 12, 13, 14, 15]
+				filaG.slice(0, 6),
+				filaG.slice(6, 13)
 			],
 			'H': [
-				[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+				[...filaH]
 			],
 		}
 
-		console.log({ rows });
-
-		return (
-			<div>
-				<div className="A">
-					{
-						filaA.map(space => (
-							<div key={space.number} className=''>{space.number}</div>
-						))
-					}
-				</div>
-			</div>
-		)
+		return rows
 
 	}
-
-	renderSpaces()
-
 
 	if (loading) return <span></span>
 
@@ -463,17 +470,16 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 	)
 }
 
-const Checkout = ({ setCurrentPage, functionId, numberedSpaces, unnumberedSpaces, setConfirmation, event, currentFunction, ticketCount }:
+const Checkout = ({ setCurrentPage, functionId, setConfirmation, event, currentFunction, selected, renderTotal }:
 
 	{
 		setCurrentPage: (page: number) => void,
 		functionId: string,
-		numberedSpaces: any[]
-		unnumberedSpaces: any[],
 		setConfirmation: any,
 		event: Event,
 		currentFunction: FunctionInterface,
-		ticketCount: any,
+		selected: SpaceInterface[],
+		renderTotal: () => number
 	}
 
 ) => {
@@ -493,8 +499,7 @@ const Checkout = ({ setCurrentPage, functionId, numberedSpaces, unnumberedSpaces
 			const order = {
 				...values,
 				functionId,
-				numberedSpaces,
-				unnumberedSpaces
+				numberedSpaces: selected.map(space => space._id),
 			}
 			try {
 				const { data } = await api.post(`/api/orders/stripePayment`, order)
@@ -527,6 +532,30 @@ const Checkout = ({ setCurrentPage, functionId, numberedSpaces, unnumberedSpaces
 	return (
 		<div className={styles.checkout}>
 			<div className={styles.leftCheckout}>
+				<div className={styles.summary}>
+					<h2>Resumen</h2>
+					<div>
+						<h3>{event?.name}</h3>
+						<div className={styles.schedule}>
+							<span>{moment(currentFunction.day).format('ll')}</span>
+							<span>{moment(currentFunction.hour, 'hh:mm').format('hh:mm a')}</span>
+						</div>
+					</div>
+					<div className={styles.subTotal}>
+						<span>Asientos: {
+							selected.map((space, index) => {
+								return `${space.number}, `
+							})
+						}</span>
+						<br />
+						<span>Subtotal</span>
+						<h3>${renderTotal()} MXN</h3>
+
+					</div>
+				</div>
+				<br />
+			</div>
+			<div className={styles.rightCheckout}>
 				<div className="contactInfo">
 					<h2>Información de contacto</h2>
 					<div className="fields">
@@ -609,30 +638,7 @@ const Checkout = ({ setCurrentPage, functionId, numberedSpaces, unnumberedSpaces
 						className='btn btn-link btn-block'>Regresar</button>
 				</div>
 			</div>
-			<div className={styles.rightCheckout}>
-				<div className={styles.summary}>
-					<h3>Resumen</h3>
-					<div>
-						<h3>{event?.name}</h3>
-						<div className={styles.schedule}>
-							<span>{moment(currentFunction.day).format('ll')}</span>
-							<span>{moment(currentFunction.hour, 'hh:mm').format('hh:mm a')}</span>
-						</div>
-					</div>
-					<div className={styles.selectedTickets}>
-						<h3>Boletos elegidos</h3>
-						<span>{ticketCount.sectionATicketCount} boleto(s) zona A</span>
-						<span>{ticketCount.sectionBTicketCount} boleto(s) zona B</span>
-					</div>
-					<div className="section">
-						<h3>Total</h3>
-						<h3>${
-									/* @ts-ignore */
-									(event?.sectionAPrice * ticketCount.sectionATicketCount) + (event?.sectionBPrice * ticketCount.sectionBTicketCount)
-								} MXN</h3>
-					</div>
-				</div>
-			</div>
+
 		</div>
 	)
 }

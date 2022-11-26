@@ -57,7 +57,9 @@ export const Layout: FC<Props> = ({
             </Head>
 
             <NavBar />
-            {children}
+            <div className="mainContent">
+                {children}
+            </div>
 
         </>
     )

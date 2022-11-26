@@ -160,6 +160,9 @@
 }
 
 .subTotal {
+    span {
+        display: block;
+    }
 }
 
 .card {
@@ -209,14 +212,16 @@
 
     .checkout {
         display: flex;
-        .leftCheckout {
+        flex-direction: row-reverse;
+        .rightCheckout {
             width: 50%;
             flex-shrink: 0;
             margin-right: 60px;
             padding-right: 60px;
             border-right: 1px solid #c6c6c6;
         }
-        .rightCheckout {
+        .leftCheckout {
+            width: 50%;
             .summary {
                 height: 100%;
                 display: flex;

@@ -33,6 +33,10 @@ a {
   box-sizing: border-box;
 }
 
+.mainContent{
+  padding-top: 80px;
+}
+
 .section {
   margin-bottom: 50px;
   span {
@@ -50,12 +54,13 @@ a {
 }
 
 .space {
-  width: 15px;
-  height: 15px;
-  border-radius: 15px;
+  width: 17px;
+  height: 17px;
+  border-radius: 17px;
   background-color: #e23542;
   flex-shrink: 0;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .sectionPrice {
@@ -65,10 +70,10 @@ a {
 }
 
 .circle {
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
 
-  border-radius: 15px;
+  border-radius: 17px;
   margin-right: 10px;
 }
 
@@ -77,6 +82,17 @@ a {
 }
 
 .sectionB {
+  background-color: #a8e0e6;
+}
+
+.wheelchair {
+  background-color: yellow;
+}
+.notAvailable {
+  background-color: gray;
+}
+
+.selected {
   background-color: black;
 }
 
@@ -149,4 +165,12 @@ a {
   span {
     display: block;
   }
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
 }

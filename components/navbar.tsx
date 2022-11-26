@@ -13,13 +13,15 @@ export const NavBar = () => {
         <>
             <div className={styles.navbar}>
                 <div className={styles.navbar__logo}>
-                    <Image
-                        style={{
-                            objectFit: 'contain'
-                        }}
-                        src='/4orium-logo.png' width={100} height={100}
-                        alt='4orium logo'
-                    />
+                    <Link href='/'>
+                        <Image
+                            style={{
+                                objectFit: 'contain'
+                            }}
+                            src='/4orium-logo.png' width={150} height={150}
+                            alt='4orium logo'
+                        />
+                    </Link>
                 </div>
 
                 <div
