@@ -4,8 +4,6 @@ import { FC, useState } from 'react'
 import { Layout, Modal } from '../components'
 import { Event } from '../components/Event'
 import { EventDetails } from '../components/EventDetails'
-import { Payment } from '../components/selectTicket/payment'
-import { Place } from '../components/selectTicket/selectPlace'
 import { Event as IEvent } from '../interfaces/Event'
 import { getEvents } from '../services/events'
 import styles from '../styles/pages/Home.module.scss'
@@ -24,10 +22,6 @@ const Home: FC<Props> = ({ events }) => {
     switch (page) {
       case 0:
         return <EventDetails />
-      case 1:
-        return <Place />
-      case 2:
-        return <Payment />
       default:
         return <></>
     }

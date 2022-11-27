@@ -80,7 +80,7 @@ export const NavBar = () => {
                     }
 
                     <div className={styles.section}>
-                        <p className={styles.section__title}>Forum</p>
+                        <p className={styles.section__title}>4orium</p>
                         <Link href={"/"} className={styles.section__link}>
                             Eventos
                         </Link>

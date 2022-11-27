@@ -1,7 +1,7 @@
 import styles from '../styles/EventDetails.module.scss'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { FC, useEffect, useState } from 'react'
+import { FC, useContext, useEffect, useState } from 'react'
 import { Event } from '../interfaces/Event'
 import { getEvent } from '../services/events'
 import { FunctionInterface } from '../interfaces/Function'
@@ -14,6 +14,7 @@ import toast from 'react-hot-toast'
 import { SpaceInterface } from '../interfaces/Space'
 import { OrderConfirmationModal } from './OrderConfirmationModal'
 import moment from 'moment'
+import { AuthContext } from '../context/auth'
 
 interface Props {
 	serverEvent?: Event,
@@ -39,6 +40,8 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 	const [currentPage, setCurrentPage] = useState(1)
 
 	const [functionSpaces, setFunctionSpaces] = useState<SpaceInterface[]>([])
+
+
 
 	const rows = {
 		'A': [
@@ -435,6 +438,8 @@ const Checkout = ({ setCurrentPage, functionId, setConfirmation, event, currentF
 
 ) => {
 
+	const { user } = useContext(AuthContext)
+
 	const elements = useElements()
 
 	const stripe = useStripe()
@@ -449,6 +454,9 @@ const Checkout = ({ setCurrentPage, functionId, setConfirmation, event, currentF
 		if (cardElement) {
 			const order = {
 				...values,
+				name: user.name || values.name,
+				email: user.email || values.email,
+				phone: user.phone || values.phone,
 				functionId,
 				numberedSpaces: selected.map(space => space._id),
 			}
@@ -513,48 +521,61 @@ const Checkout = ({ setCurrentPage, functionId, setConfirmation, event, currentF
 			<div className={styles.rightCheckout}>
 				<div className="contactInfo">
 					<h2>Información de contacto</h2>
-					<div className="fields">
-						<div className="group">
-							<input
-								className='input'
-								placeholder='Nombre y apellido' type="text"
-								{...register('name', {
-									required: true
-								})}
-							/>
-							{
-								errors.name &&
-								<span className="error">Requerido</span>
-							}
-						</div>
-						<div className="group">
-							<input
-								className='input'
-								placeholder='Correo electrónico' type="email"
-								{...register('email', {
-									required: true
-								})}
-							/>
-							{
-								errors.email &&
-								<span className="error">Requerido</span>
-							}
-						</div>
-						<div className="group">
-							<input
-								className='input'
-								placeholder='Teléfono'
-								type="text"
-								{...register('phone', {
-									required: true
-								})}
-							/>
-							{
-								errors.phone &&
-								<span className="error">Requerido</span>
-							}
-						</div>
-					</div>
+					{
+						user.token ? <div>
+							<div className="group">
+								<span>Nombre: {user.name}</span>
+							</div>
+							<div className="group">
+								<span>Correo: {user.email}</span>
+							</div>
+							<div className="group">
+								<span>Telefono: {user.phone}</span>
+							</div>
+						</div> :
+							<div className="fields">
+								<div className="group">
+									<input
+										className='input'
+										placeholder='Nombre y apellido' type="text"
+										{...register('name', {
+											required: true
+										})}
+									/>
+									{
+										errors.name &&
+										<span className="error">Requerido</span>
+									}
+								</div>
+								<div className="group">
+									<input
+										className='input'
+										placeholder='Correo electrónico' type="email"
+										{...register('email', {
+											required: true
+										})}
+									/>
+									{
+										errors.email &&
+										<span className="error">Requerido</span>
+									}
+								</div>
+								<div className="group">
+									<input
+										className='input'
+										placeholder='Teléfono'
+										type="text"
+										{...register('phone', {
+											required: true
+										})}
+									/>
+									{
+										errors.phone &&
+										<span className="error">Requerido</span>
+									}
+								</div>
+							</div>
+					}
 				</div>
 				<div className="paymentInfo">
 					<h2>Método de pago</h2>
