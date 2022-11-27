@@ -1,5 +1,5 @@
 import { User } from '../../interfaces';
-import { AuthState } from './';
+import { AuthState } from './AuthProvider';
 
 type AuthActionType =
   {

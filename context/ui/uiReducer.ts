@@ -1,17 +1,6 @@
-import { Collection, Product } from '../../interfaces';
-import { UIState } from './';
+import { UIState } from './UIProvider';
 
 type UIActionType =
-  {
-    type: 'UI - Set Products',
-    payload: Product[]
-  }
-  |
-  {
-    type: 'UI - Set Collections',
-    payload: Collection[]
-  }
-  |
   {
     type: 'UI - Set Visible',
     payload: boolean
@@ -30,16 +19,6 @@ type UIActionType =
 export const uiReducer = (state: UIState, action: UIActionType): UIState => {
 
   switch (action.type) {
-    case 'UI - Set Products':
-      return {
-        ...state,
-        products: action.payload
-      }
-    case 'UI - Set Collections':
-      return {
-        ...state,
-        collections: action.payload
-      }
     case 'UI - Set Visible':
       return {
         ...state,
