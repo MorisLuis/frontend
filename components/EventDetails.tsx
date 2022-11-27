@@ -109,21 +109,21 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 
 		let backgroundColor = '#e23542'
 
-		if (space.number === 'A-1') {
-			return backgroundColor = 'yellow'
+		if (selected.map(item => item._id).includes(space._id)) {
+			return backgroundColor = 'black'
 		}
+
 		if (!space.isAvailable) {
 			return backgroundColor = 'gray'
+		}
+
+		if (space.number === 'A-1') {
+			return backgroundColor = 'yellow'
 		}
 
 		if (index === 6 || index === 7) {
 			return backgroundColor = '#a8e0e6'
 		}
-
-		if (selected.map(item => item._id).includes(space._id)) {
-			return backgroundColor = 'black'
-		}
-
 	}
 
 	const renderTotal = () => {
