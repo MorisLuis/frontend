@@ -3,4 +3,4 @@ export * from './navbar'
 export * from './modal'
 export * from './Event'
 
-export * from './Layouts/layout'
+export * from './Layouts/Layout'
