@@ -16,7 +16,7 @@ interface Props {
 const EventDetailsPage: FC<Props> = ({ event, functions }) => {
 
     return (
-        <Layout title={event.name}>
+        <Layout image={event.image} description={event.description} title={event.name}>
             <EventDetails serverFunctions={functions} serverEvent={event} />
         </Layout>
     )
