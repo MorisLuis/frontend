@@ -51,12 +51,12 @@ export const NavBar = () => {
                         user.token ?
                             <div className={styles.section}>
                                 <p className={styles.section__title}>Perfil</p>
-                                <Link href={"/profile/tickets"} className={styles.section__link}>
+                                <Link href={"/account/tickets"} className={styles.section__link}>
                                     Mis boletos
                                 </Link>
 
-                                <Link href={"/profile"} className={styles.section__link}>
-                                    Mi perfil
+                                <Link href={"/account"} className={styles.section__link}>
+                                    Mi cuenta
                                 </Link>
                             </div> :
                             <div className={styles.section}>
