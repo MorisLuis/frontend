@@ -180,7 +180,7 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 						<div className={styles.left}>
 							<div className="section">
 								<h1>{event?.name}</h1>
-								<Image alt="Forum" src={
+								<Image alt={event?.image || ''} src={
 									event?.image || ''
 								} className={styles.picture} width={300} height={200} />
 							</div>

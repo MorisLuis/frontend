@@ -19,7 +19,7 @@ export const Event: FC<IEvent> = ({ name, image, slug }) => {
             >
                 <div className={styles.event__item}>
                     <div className={styles.image}>
-                        <Image alt="Forum" src={image} className={styles.picture} width={300} height={200} />
+                        <Image alt={name} src={image} className={styles.picture} width={300} height={200} />
                     </div>
 
                     <div className={styles.title}>

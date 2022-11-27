@@ -58,9 +58,9 @@ export const NavBar = () => {
                             Eventos
                         </Link>
 
-                        <Link href={"#"} className={styles.section__link}>
+                        {/* <Link href={"#"} className={styles.section__link}>
                             Como llegar
-                        </Link>
+                        </Link> */}
                     </div>
                 </div>
 

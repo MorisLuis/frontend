@@ -18,7 +18,7 @@ export const Layout: FC<Props> = ({
     image = '/300x300.png',
     type = 'website',
     keywords,
-    description = 'En Globemily® nos dedicamos a la creación de eventos, arreglos de globos y  arreglos florales estilo bouquet. Utilizamos flores frescas elegidas especialmente para cada uno de nuestros clientes en cajas, bases, ramos y demás productos, siempre con los mejores acabados.'
+    description = 'Espacio para artes y crear lo que te mueve. Escenario: 116 𝕙𝕦𝕞𝕒𝕟𝕠𝕤 por evento. Salas multifuncionales para cursos, alquileres, deseos'
 }) => {
 
     const { asPath } = useRouter()
