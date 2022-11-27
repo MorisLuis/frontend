@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { FC } from 'react'
+import { FC, useContext } from 'react'
+import { UIContext } from '../../context/ui'
+import AuthModal from '../AuthModal'
 import { NavBar } from "../index"
 
 interface Props {
@@ -22,6 +24,8 @@ export const Layout: FC<Props> = ({
 }) => {
 
     const { asPath } = useRouter()
+
+    const { visible, setVisible, modalType, searchVisible, setSearchVisible } = useContext(UIContext)
 
     return (
         <>
@@ -57,6 +61,11 @@ export const Layout: FC<Props> = ({
             </Head>
 
             <NavBar />
+            <AuthModal
+                onClose={() => { setVisible(false) }}
+                visible={visible}
+                type={modalType}
+            />
             <div className="mainContent">
                 {children}
             </div>

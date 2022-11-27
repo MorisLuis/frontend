@@ -18,10 +18,4 @@
   background-color: transparent;
 }
 
-button {
-  cursor: pointer;
-  &:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-}
+

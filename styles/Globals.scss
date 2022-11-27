@@ -44,6 +44,14 @@ a {
   }
 }
 
+button {
+  cursor: pointer;
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
 .leftSpaces,
 .rightSpaces {
   display: flex;

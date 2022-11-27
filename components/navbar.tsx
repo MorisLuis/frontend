@@ -1,12 +1,18 @@
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { AuthContext } from "../context/auth"
+import { UIContext } from "../context/ui"
 import styles from "../styles/components/NavBar.module.scss"
 
 export const NavBar = () => {
 
     const [isOpen, setIsOpen] = useState(false)
     const openMenu = () => setIsOpen(!isOpen);
+
+    const { user } = useContext(AuthContext)
+
+    const { setSearchVisible, setVisible, setModalType } = useContext(UIContext)
 
     return (
 
@@ -41,16 +47,37 @@ export const NavBar = () => {
                 </div>
 
                 <div className={styles.menu__navbar}>
-                    <div className={styles.section}>
-                        <p className={styles.section__title}>Perfil</p>
-                        <Link href={"/profile/tickets"} className={styles.section__link}>
-                            Mis boletos
-                        </Link>
+                    {
+                        user.token ?
+                            <div className={styles.section}>
+                                <p className={styles.section__title}>Perfil</p>
+                                <Link href={"/profile/tickets"} className={styles.section__link}>
+                                    Mis boletos
+                                </Link>
 
-                        <Link href={"/profile"} className={styles.section__link}>
-                            Mi perfil
-                        </Link>
-                    </div>
+                                <Link href={"/profile"} className={styles.section__link}>
+                                    Mi perfil
+                                </Link>
+                            </div> :
+                            <div className={styles.section}>
+                                <p className={styles.section__title}>Perfil</p>
+                                <div onClick={() => {
+                                    setVisible(true)
+                                    setModalType('login')
+                                    setIsOpen(false)
+                                }} className={styles.section__link}>
+                                    Iniciar sesión
+                                </div>
+
+                                <div onClick={() => {
+                                    setVisible(true)
+                                    setModalType('sign-up')
+                                    setIsOpen(false)
+                                }} className={styles.section__link}>
+                                    Regístrate
+                                </div>
+                            </div>
+                    }
 
                     <div className={styles.section}>
                         <p className={styles.section__title}>Forum</p>

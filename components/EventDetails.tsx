@@ -465,7 +465,9 @@ const Checkout = ({ setCurrentPage, functionId, setConfirmation, event, currentF
 					}
 				})
 				if (confirmPayment?.error) {
-					toast.error(confirmPayment.error.message || 'Error')
+					toast.error(confirmPayment.error.message || 'Error', {
+						duration: 6000
+					})
 					setWaiting(false)
 					return
 				}
@@ -475,7 +477,9 @@ const Checkout = ({ setCurrentPage, functionId, setConfirmation, event, currentF
 					setWaiting(false)
 				}
 			} catch (error: any) {
-				toast.error(error?.response?.data?.message || 'Error')
+				toast.error(error?.response?.data?.message || 'Error', {
+					duration: 6000
+				})
 				setWaiting(false)
 			}
 		}
