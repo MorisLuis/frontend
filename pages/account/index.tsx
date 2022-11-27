@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { api } from '../../api/api'
-import { Layout } from '../../components'
+import { Layout } from '../../components/Layouts/Layout'
 import Input from '../../components/Input'
 import { AuthContext } from '../../context/auth'
 import { User, Order } from '../../interfaces/'
@@ -27,7 +27,7 @@ const Account = () => {
         const fetchData = async () => {
             if (user.id) {
                 try {
-                    const { data } = await api.get(`/api/orders`)
+                    const { data } = await api.get(`/api/orders?customer=${user.id}`)
                     setOrders(data.orders)
                     setLoading(false)
                 } catch (error) {
@@ -51,14 +51,14 @@ const Account = () => {
             <div className={styles.account}>
                 <div className={styles.topbar}>
                     <Link
-                        href={{ pathname: '/account', query: { tab: 'profile' } }}
+                        href='/account'
                     >
                         Perfil
                     </Link>
                     <Link
                         href={{ pathname: '/account', query: { tab: 'orders' } }}
                     >
-                        Pedidos
+                        Mis boletos
                     </Link>
 
                 </div>
@@ -113,16 +113,17 @@ const Account = () => {
                             {
                                 orders.length === 0 ?
                                     <div className='empty'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
                                         </svg>
-                                        <h2>No hay pedidos aún</h2>
-                                        <Link className="btn btn-pink btn-block" href='/products'>
-                                            Explorar tienda
+
+                                        <h2>No hay boletos comprados aún</h2>
+                                        <Link className="btn btn-red btn-block" href='/'>
+                                            Explorar cartelera
                                         </Link>
                                     </div> :
                                     <div className={styles.orderList}>
-                                        <h3>Historial de pedidos</h3>
+                                        <h3>Historial de compras</h3>
                                         <table className={styles.table}>
                                             <thead className={styles.header}>
                                                 <tr>

@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
-import { Layout, Modal } from '../components'
+import { Layout } from '../components/Layouts/Layout'
 import { Event } from '../components/Event'
 import { EventDetails } from '../components/EventDetails'
 import { Event as IEvent } from '../interfaces/Event'
 import { getEvents } from '../services/events'
 import styles from '../styles/pages/Home.module.scss'
+import { Modal } from '../components'
 
 interface Props {
   events: IEvent[]

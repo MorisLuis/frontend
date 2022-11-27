@@ -51,7 +51,7 @@ export const NavBar = () => {
                         user.token ?
                             <div className={styles.section}>
                                 <p className={styles.section__title}>Perfil</p>
-                                <Link href={"/account/tickets"} className={styles.section__link}>
+                                <Link href={"/account?tab=orders"} className={styles.section__link}>
                                     Mis boletos
                                 </Link>
 

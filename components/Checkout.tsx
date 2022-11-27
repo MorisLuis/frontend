@@ -40,6 +40,7 @@ export const Checkout = ({ setCurrentPage, functionId, setConfirmation, event, c
 		if (cardElement) {
 			const order = {
 				...values,
+				user: user.id,
 				name: user.name || values.name,
 				email: user.email || values.email,
 				phone: user.phone || values.phone,

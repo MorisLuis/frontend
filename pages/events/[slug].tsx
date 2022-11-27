@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import React, { FC } from 'react'
-import { Layout } from '../../components'
+import { Layout } from '../../components/Layouts/Layout'
 import { EventDetails } from '../../components/EventDetails'
 import { Event } from '../../interfaces/Event'
 import { FunctionInterface } from '../../interfaces/Function'

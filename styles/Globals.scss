@@ -61,6 +61,12 @@ button {
   margin-right: 30px;
 }
 
+a.btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .space {
   width: 17px;
   height: 17px;
