@@ -6,11 +6,19 @@ export const postEvent = async (event: any) => {
 }
 
 export const getEvents = async () => {
-  const { data } = await api.get('/api/events')
+  const { data } = await api.get('/api/events', {
+    headers: {
+      'Accept-Encoding': null,
+    }
+  })
   return data
 }
 
 export const getEvent = async (slug: string) => {
-  const { data } = await api.get(`/api/events/${slug}`)
+  const { data } = await api.get(`/api/events/${slug}`, {
+    headers: {
+      'Accept-Encoding': null,
+    }
+  })
   return data
 }
