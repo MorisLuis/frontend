@@ -38,42 +38,6 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 
 	const [functionSpaces, setFunctionSpaces] = useState<SpaceInterface[]>([])
 
-
-
-	const rows = {
-		'A': [
-			[1, 2, 3, 4, 5, 6],
-			[7, 8, 9, 10, 11, 12, 13]
-		],
-		'B': [
-			[1, 2, 3, 4, 5, 6],
-			[7, 8, 9, 10, 11, 12, 13, 14, 15]
-		],
-		'C': [
-			[1, 2, 3, 4, 5, 6],
-			[7, 8, 9, 10, 11, 12, 13, 14, 15]
-		],
-		'D': [
-			[1, 2, 3, 4, 5, 6],
-			[7, 8, 9, 10, 11, 12, 13, 14, 15]
-		],
-		'E': [
-			[1, 2, 3, 4, 5, 6],
-			[7, 8, 9, 10, 11, 12, 13, 14, 15]
-		],
-		'F': [
-			[1, 2, 3, 4, 5, 6],
-			[7, 8, 9, 10, 11, 12, 13, 14, 15]
-		],
-		'G': [
-			[1, 2, 3, 4, 5, 6],
-			[7, 8, 9, 10, 11, 12, 13, 14, 15]
-		],
-		'H': [
-			[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-		],
-	}
-
 	const [selected, setSelected] = useState<SpaceInterface[]>([])
 
 	useEffect(() => {
@@ -309,7 +273,7 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 						<div className={styles.functionRight}>
 							<div className={styles.subTotal}>
 								<span>Asientos: {
-									selected.map((space, index) => {
+									selected.map((space) => {
 										return `${space.number}, `
 									})
 								}</span>
@@ -369,31 +333,31 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 		const rows = {
 			'A': [
 				filaA.slice(0, 6),
-				filaA.slice(6, 13)
+				filaA.slice(6, 15)
 			],
 			'B': [
 				filaB.slice(0, 6),
-				filaB.slice(6, 13)
+				filaB.slice(6, 15)
 			],
 			'C': [
 				filaC.slice(0, 6),
-				filaC.slice(6, 13)
+				filaC.slice(6, 15)
 			],
 			'D': [
 				filaD.slice(0, 6),
-				filaD.slice(6, 13)
+				filaD.slice(6, 15)
 			],
 			'E': [
 				filaE.slice(0, 6),
-				filaE.slice(6, 13)
+				filaE.slice(6, 15)
 			],
 			'F': [
 				filaF.slice(0, 6),
-				filaF.slice(6, 13)
+				filaF.slice(6, 15)
 			],
 			'G': [
 				filaG.slice(0, 6),
-				filaG.slice(6, 13)
+				filaG.slice(6, 14)
 			],
 			'H': [
 				[...filaH]
