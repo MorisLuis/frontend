@@ -14,6 +14,11 @@
     position: fixed;
     top: 0;
     overflow: hidden;
+
+    .menuOpen {
+        padding: 10px;
+        cursor: pointer;
+    }
 }
 
 .close {
@@ -33,6 +38,8 @@
         width: 100%;
         display: flex;
         justify-content: flex-end;
+        padding: 10px;
+        cursor: pointer;
     }
 
     &__navbar {
@@ -50,6 +57,8 @@
 
             &__link {
                 margin-bottom: 15px;
+                padding: 10px;
+                cursor: pointer;
             }
         }
     }

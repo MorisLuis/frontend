@@ -31,7 +31,7 @@ export const NavBar = () => {
                 </div>
 
                 <div
-                    className={styles.navbar__menu}
+                    className={styles.menuOpen}
                     onClick={openMenu}
                 >
                     Menu
