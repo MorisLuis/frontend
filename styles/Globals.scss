@@ -33,7 +33,7 @@ a {
   box-sizing: border-box;
 }
 
-.mainContent{
+.mainContent {
   padding-top: 80px;
 }
 
@@ -61,7 +61,7 @@ button {
   margin-right: 30px;
 }
 
-a.btn{
+a.btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -187,4 +187,17 @@ a.btn{
 
 .mb-20 {
   margin-bottom: 20px;
+}
+
+.web-functions {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobile-functions {
+    display: none;
+  }
+  .web-functions {
+    display: block;
+  }
 }
