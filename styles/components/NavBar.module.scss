@@ -5,6 +5,7 @@
     width: 100%;
     height: 80px;
     background-color: $color-primary-light;
+    z-index: 99;
     color: $black;
 
     display: flex;
@@ -33,6 +34,7 @@
     position: fixed;
     top: 0px;
     color: white !important;
+    z-index: 399;
 
     &__close {
         width: 100%;

@@ -107,41 +107,45 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 				return (
 					<div className={styles.eventInfo}>
 						<div className={styles.right}>
-							<div className="web-functions">
-								<p className={styles.right__subtitle}>Funciones disponibles</p>
-								{
-									functions?.map((functionItem) => (
-										<div
-											onClick={() => {
-												fetchFunction(functionItem._id)
-											}}
-											key={functionItem._id} className={styles.right__ticket}>
-											<div className={styles.item}>
-												<div className={styles.item__info}>
-													<p className={styles.item__date}>
-														{
-															moment(functionItem.day).format('ll')
-														}
-													</p>
-													<p className={styles.item__hour}> {
-														moment(functionItem.hour, 'hh:mm').format('hh:mm a')
-													}</p>
-												</div>
-												<div className={styles.chevron}>
-													<svg
-														style={{
-															width: 25,
-															height: 25
-														}}
-														xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-														<path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-													</svg>
+							{
+								//@ts-ignore
+								functions?.length > 0 &&
+								<div className="web-functions">
+									<p className={styles.right__subtitle}>Funciones disponibles</p>
+									{
+										functions?.map((functionItem) => (
+											<div
+												onClick={() => {
+													fetchFunction(functionItem._id)
+												}}
+												key={functionItem._id} className={styles.right__ticket}>
+												<div className={styles.item}>
+													<div className={styles.item__info}>
+														<p className={styles.item__date}>
+															{
+																moment(functionItem.day).format('ll')
+															}
+														</p>
+														<p className={styles.item__hour}> {
+															moment(functionItem.hour, 'hh:mm').format('hh:mm a')
+														}</p>
+													</div>
+													<div className={styles.chevron}>
+														<svg
+															style={{
+																width: 25,
+																height: 25
+															}}
+															xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+															<path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+														</svg>
+													</div>
 												</div>
 											</div>
-										</div>
-									))
-								}
-							</div>
+										))
+									}
+								</div>
+							}
 						</div>
 						<div className={styles.left}>
 							<div className="section">
@@ -150,46 +154,54 @@ export const EventDetails: FC<Props> = ({ serverEvent, serverFunctions }) => {
 									event?.image || ''
 								} className={styles.picture} width={300} height={200} />
 							</div>
-							<div className="section mobile-functions">
-								<p className={styles.right__subtitle}>Funciones disponibles</p>
-								{
-									functions?.map((functionItem) => (
-										<div
-											onClick={() => {
-												fetchFunction(functionItem._id)
-											}}
-											key={functionItem._id} className={styles.right__ticket}>
-											<div className={styles.item}>
-												<div className={styles.item__info}>
-													<p className={styles.item__date}>
-														{
-															moment(functionItem.day).format('ll')
-														}
-													</p>
-													<p className={styles.item__hour}> {
-														moment(functionItem.hour, 'hh:mm').format('hh:mm a')
-													}</p>
-												</div>
-												<div className={styles.chevron}>
-													<svg
-														style={{
-															width: 25,
-															height: 25
-														}}
-														xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-														<path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-													</svg>
+							{
+								//@ts-ignore
+								functions?.length > 0 &&
+								<div className="section mobile-functions">
+									<p className={styles.right__subtitle}>Funciones disponibles</p>
+									{
+										functions?.map((functionItem) => (
+											<div
+												onClick={() => {
+													fetchFunction(functionItem._id)
+												}}
+												key={functionItem._id} className={styles.right__ticket}>
+												<div className={styles.item}>
+													<div className={styles.item__info}>
+														<p className={styles.item__date}>
+															{
+																moment(functionItem.day).format('ll')
+															}
+														</p>
+														<p className={styles.item__hour}> {
+															moment(functionItem.hour, 'hh:mm').format('hh:mm a')
+														}</p>
+													</div>
+													<div className={styles.chevron}>
+														<svg
+															style={{
+																width: 25,
+																height: 25
+															}}
+															xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+															<path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+														</svg>
+													</div>
 												</div>
 											</div>
-										</div>
-									))
-								}
-							</div>
-							<div className="section">
-								<h2>Precios</h2>
-								<span>Zona A: ${event?.sectionAPrice}</span>
-								<span>Zona B: ${event?.sectionBPrice}</span>
-							</div>
+										))
+									}
+								</div>
+							}
+							{
+								//@ts-ignore
+								event?.sectionAPrice > 0 && event?.sectionBPrice > 0 &&
+								<div className="section">
+									<h2>Precios</h2>
+									<span>Zona A: ${event?.sectionAPrice}</span>
+									<span>Zona B: ${event?.sectionBPrice}</span>
+								</div>
+							}
 							<div className="section">
 								<h2>Acerca del evento</h2>
 								<span>{event?.description}</span>

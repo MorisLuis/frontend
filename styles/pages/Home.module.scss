@@ -31,9 +31,11 @@
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
+            align-items: flex-start;
             
             &__action{
                 display: flex;
+                align-items: center;
             }
 
             &__text {
@@ -42,7 +44,6 @@
 
             &__more{
                 display: flex;
-                align-items: center;
                 font-size: 9px;
                 font-weight: lighter;
                 margin-right: 5px;
