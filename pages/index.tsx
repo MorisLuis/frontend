@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
 import { Layout } from '../components/Layouts/Layout'
@@ -64,7 +63,6 @@ export const getServerSideProps = async () => {
 
   try {
     data = await getEvents()
-    console.log({data})
   } catch (error) {
     console.log(error);
   }
