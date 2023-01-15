@@ -1,15 +1,21 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Layout } from '../components'
+import Layout from '../components/Layouts/Layout'
 import styles from '../styles/pages/Home.module.scss'
 
-export default function Home() {
+const Home = () => {
   return (
     <>
 
     <Layout>
-      <p className={styles.title}>Hola!!</p>
+      <div className='head'>
+        <p className={styles.title}>Hola!!</p>
+        <div className='noise'>
+        </div>
+      </div>
     </Layout>
     </>
   )
 }
+
+export default Home

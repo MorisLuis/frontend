@@ -1,5 +1,5 @@
 export * from './footer'
-export * from './navbar'
-export * from './modal'
+export * from './Navigation/navbar'
+export * from './Modals/modal'
 
-export * from './layouts/Layout'
+export * from './Layouts/Layout'
