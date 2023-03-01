@@ -13,20 +13,7 @@ interface Props {
 }
 
 const Home: FC<Props> = ({ events }) => {
-
-  const [page, setPage] = useState(0)
-
   const router = useRouter()
-
-  const pageDisplay = () => {
-    switch (page) {
-      case 0:
-        return <EventDetails />
-      default:
-        return <></>
-    }
-  }
-
   return (
     <>
       <Layout title='Cartelera'>
@@ -47,7 +34,7 @@ const Home: FC<Props> = ({ events }) => {
           onClose={() => router.push('/', undefined, { scroll: false })}
           onCancel={() => router.push('/', undefined, { scroll: false })}
         >
-          {pageDisplay()}
+          <EventDetails />
         </Modal>
       </Layout>
     </>
