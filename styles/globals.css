@@ -1,0 +1,102 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 10px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: white;
+  }
+}
+
+.head{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+
+.noise{
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  position: relative;
+}
+
+.noise::after{
+  width: calc(100% + 20rem);
+  height: calc(100% + 20rem);
+  background-image: url("/download.png");
+  background-position: 50%;
+  position: absolute;
+  animation: minanimacion 1s steps(2) infinite;
+  content: "";
+    left: -10rem;
+    top: -10rem;
+    will-change: transform;
+    -webkit-animation: minanimacion 1s steps(2) infinite;
+}
+
+
+@keyframes minanimacion {
+  0% {
+    transform: translate3d(0,0,0)
+  }
+
+  10% {
+      transform: translate3d(-1rem,-4rem,0)
+  }
+
+  20% {
+      transform: translate3d(-8rem,2rem,0)
+  }
+
+  30% {
+      transform: translate3d(9rem,-9rem,0)
+  }
+
+  40% {
+      transform: translate3d(-2rem,7rem,0)
+  }
+
+  50% {
+      transform: translate3d(-9rem,-4rem,0)
+  }
+
+  60% {
+      transform: translate3d(2rem,6rem,0)
+  }
+
+  70% {
+      transform: translate3d(7rem,-8rem,0)
+  }
+
+  80% {
+      transform: translate3d(-9rem,1rem,0)
+  }
+
+  90% {
+      transform: translate3d(6rem,-5rem,0)
+  }
+
+  to {
+      transform: translate3d(-7rem,0,0)
+  }
+}

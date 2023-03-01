@@ -1,10 +1,6 @@
-import { useRouter } from 'next/router'
-import { FC, useState } from 'react'
-import { Layout } from '../components/Layouts/Layout'
-import { Event } from '../components/Event'
-import { EventDetails } from '../components/EventDetails'
-import { Event as IEvent } from '../interfaces/Event'
-import { getEvents } from '../services/events'
+import Head from 'next/head'
+import Image from 'next/image'
+import Layout from '../components/Layouts/Layout'
 import styles from '../styles/pages/Home.module.scss'
 import { Modal } from '../components'
 
@@ -16,18 +12,10 @@ const Home: FC<Props> = ({ events }) => {
   const router = useRouter()
   return (
     <>
-      <Layout title='Cartelera'>
-        <div className={styles.event}>
-          <div className={styles.event__top}>
-            <p className={styles.heading_primary}>Eventos</p>
-          </div>
-          <div className={styles.eventsGrid}>
-            {
-              events.map((event) => (
-                <Event key={event._id} {...event} />
-              ))
-            }
-          </div>
+    <Layout>
+      <div className='head'>
+        <p className={styles.title}>Hola!!</p>
+        <div className='noise'>
         </div>
         <Modal
           visible={!!router.query.slug}
@@ -42,22 +30,3 @@ const Home: FC<Props> = ({ events }) => {
 }
 
 export default Home
-
-
-export const getServerSideProps = async () => {
-
-  let data
-
-  try {
-    data = await getEvents()
-  } catch (error) {
-    console.log(error);
-  }
-
-
-  return {
-    props: {
-      events: data.events
-    }
-  }
-}
